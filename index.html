@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ONN STORE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #000000, #1a1a1a);
+      color: #fff;
+      padding-bottom: 6rem;
+    }
+
+    header {
+      padding: 2rem 1rem 1rem;
+      text-align: center;
+      background: #000;
+    }
+
+    header img {
+      height: 80px;
+      margin-bottom: 0.5rem;
+    }
+
+    header h1 {
+      color: #ff8000;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+
+    .produtos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+
+
+    
+    .produto {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s, opacity 1s ease;
+      box-shadow: 0 0 10px #ff800040;
+      opacity: 0;
+      transform: translateY(30px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .produto.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .produto:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px #ff800080;
+    }
+
+    .produto img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .produto .emoji-icon {
+      font-size: 7rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .produto-content {
+      padding: 1rem;
+      width: 100%;
+    }
+
+    .produto h2 {
+      font-size: 1.2rem;
+      color: #ff9933;
+      margin-bottom: 0.5rem;
+    }
+
+    .produto p {
+      font-size: 0.9rem;
+      color: #ccc;
+      line-height: 1.3;
+    }
+
+    .produto a {
+      display: block;
+      background: #ff8000;
+      color: #000;
+      padding: 0.6rem 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+      width: fit-content;
+      margin: 1rem auto 0;
+      text-align: center;
+    }
+
+    .produto a:hover {
+      background: #cc6600;
+    }
+
+    .separador-seg {
+  grid-column: 1 / -1;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  height: 3rem;
+  margin: 2rem 0 1rem;
+  background: #111;
+  border-top: 2px solid #ff8000;
+  border-bottom: 2px solid #ff8000;
+}
+
+.separador-seg span {
+  display: inline-block;
+  position: absolute;
+  white-space: nowrap;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff8000;
+  text-shadow: 0 0 10px #ff8000;
+  animation: marquee 12s linear infinite;
+}
+
+
+@keyframes flutuar {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+header img {
+  height: 80px;
+  margin-bottom: 0.5rem;
+  animation: flutuar 3s ease-in-out infinite;
+}
+
+
+
+  .separador-seg {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #ff8000;
+      padding: 0.8rem 0;
+      border-top: 2px solid #ff8000;
+      border-bottom: 2px solid #ff8000;
+      margin: 2rem 0 1rem;
+    }
+
+
+    #topoBtn {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background-color: #ff8000;
+      color: #000;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff800080;
+      display: none;
+      z-index: 999;
+    }
+
+    #topoBtn:hover {
+      background-color: #cc6600;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+
+    .whatsapp-float a {
+      background-color: #25d366;
+      color: white;
+      border-radius: 50%;
+      padding: 16px;
+      font-size: 24px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px #25d366;
+    }
+
+    .whatsapp-float a:hover {
+      background-color: #1ebd59;
+    }
+
+    @media (max-width: 768px) {
+      .produtos {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+
+      .produto img {
+        height: 180px;
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+      }
+    }
+
+
+    @keyframes marquee {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: -100%;
+  }
+}
+
+
+.carrossel-container {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.carrossel-titulo {
+  color: #ff8000;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  text-shadow: 0 0 10px #ff8000aa;
+}
+
+.carrossel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1.2rem;
+  padding-bottom: 1rem;
+  scrollbar-width: none; /* Firefox */
+}
+
+.carrossel::-webkit-scrollbar {
+  display: none; /* Chrome */
+}
+
+.card-filme {
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #ff800040;
+  width: 180px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.card-filme:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ff800080;
+}
+
+.card-filme img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://i.postimg.cc/q7t5zKdG/logo2222.png" alt="Logo ONN STORE">
+    <h1>Seus Produtos Digitais</h1>
+  </header>
+
+  <div class="separador-seg"><span> TODOS OS CANAIS LIBERADO 📺 TODOS OS CANAIS LIBERADO 📺 TODOS OS CANAIS LIBERADO 📺 TODOS OS CANAIS LIBERADO 📺 TODOS OS CANAIS LIBERADO 📺 TODOS OS CANAIS LIBERADO 📺 TODOS OS CANAIS LIBERADO 📺 TODOS OS CANAIS LIBERADO 📺  </span></div>
+
+  <div class="produtos" id="produtos">
+
+   <div class="produto">
+      <img src="https://i.postimg.cc/Fz030cp8/Chat-GPT-Image-17-04-2025-15-24.png" alt="Plano Básico">
+      <div class="produto-content">
+        <h2>TESTE GRATIS</h2>
+        <p>TODOS OS CANAIS LIBERADO </p>
+        <a href="https://wa.me/5551980323797?text=QUERO%20MEU%20TESTE%20GRATIS" target="_blank" rel="noopener noreferrer">Comprar</a>
+      </div>
+    </div>
+
+
+    <div class="produto">
+      <img src="https://i.postimg.cc/VkS5fXRR/Chat-GPT-Image-30-04-2025-11-19-35.png" alt="Plano Básico">
+      <div class="produto-content">
+        <h2>CANAIS LIBERADO R$ 15,00</h2>
+        <p>🔹 BÁSICO – 1 Conexão<br>Qualidade HD/SD</p>
+        <a href="https://wa.me/5551980323797?text=COMPREI%0A%0A%F0%9F%94%B9%20B%C3%81SICO%20%E2%80%93%20R%2415%2Fm%C3%AAs%0A1%20Conex%C3%A3o%0AQualidade%20HD%2FSD" target="_blank" rel="noopener noreferrer">Comprar</a>
+      </div>
+    </div>
+
+    <div class="produto">
+      <img src="https://i.postimg.cc/jj9g5M5Z/Chat-GPT-Image-30-04-2025-11-15-24.png" alt="Plano Intermediário">
+      <div class="produto-content">
+        <h2>CANAIS LIBERADO R$ 25,00</h2>
+        <p>🔹 INTERMEDIÁRIO – 2 Conexões<br>Qualidade FHD/HD/SD</p>
+        <a href="https://wa.me/5551980323797?text=COMPREI%0A%0A%F0%9F%94%B9%20INTERMEDI%C3%81RIO%20%E2%80%93%20R%2425%2Fm%C3%AAs%0A2%20Conex%C3%B5es%0AQualidade%20FHD%2FHD%2FSD" target="_blank" rel="noopener noreferrer">Comprar</a>
+      </div>
+    </div>
+
+    <div class="produto">
+      <img src="https://i.postimg.cc/L6snXBbZ/Chat-GPT-Image-30-04-2025-11-23-46.png" alt="Plano Avançado">
+      <div class="produto-content">
+        <h2>CANAIS LIBERADO R$ 30,00</h2>
+        <p>🔹 AVANÇADO – 2 Conexões<br>FHD/HD/SD/4K + Conteúdo adulto</p>
+        <a href="https://wa.me/5551980323797?text=COMPREI%0A%0A%F0%9F%94%B9%20AVAN%C3%87ADO%20%E2%80%93%20R%2430%2Fm%C3%AAs%0A2%20Conex%C3%B5es%20%7C%20%0AQualidade%20FHD%2FHD%2FSD%2F4K" target="_blank" rel="noopener noreferrer">Comprar</a>
+      </div>
+    </div>
+
+    <div class="separador-seg"> FILMES E SERIE </div>
+
+    <div class="produto">
+      <img src="https://i.postimg.cc/hj7RwNJB/logo-da-netflix-foto-reproducao.jpg" alt="Netflix">
+      <div class="produto-content">
+        <h2>NETFLIX R$ 19,00</h2>
+        <p>NETFLIX 1 TELA PRIVADA SÓ SUA</p>
+        <a href="https://www.nexte.shop/netflix-1-tela-privada-so-sua/p" target="_blank" rel="noopener noreferrer">Comprar</a>
+      </div>
+    </div>
+
+    <div class="produto">
+      <img src="https://i.postimg.cc/kgk0yPwt/WW.jpg" alt="Max">
+      <div class="produto-content">
+        <h2>MAX R$ 15,00</h2>
+        <p>MAX TELA PRIVADA 30 DIAS</p>
+        <a href="https://www.nexte.shop/hbo-max-tela-privada-30-dias/p" target="_blank" rel="noopener noreferrer">Comprar</a>
+      </div>
+    </div>
+
+    <div class="produto">
+      <img src="https://i.postimg.cc/6QzgC1Ms/Captura-de-tela-2025-05-01-141448.png" alt="Disney+Star">
+      <div class="produto-content">
+        <h2>DISNEY+STAR R$ 16,00</h2>
+        <p>DISNEY+STAR PREMIUM 4K ULTRA HD 30 DIAS | 1 TELA</p>
+        <a href="https://www.nexte.shop/disneystar-premium-4k-ultra-hd-30-dias-1-tela/p" target="_blank" rel="noopener noreferrer">Comprar</a>
+      </div>
+    </div>
+
+    <div class="produto">
+      <img src="https://i.postimg.cc/0NdcyBHw/globoplay-30-dias-682116c9a5d04-large.webp" alt="Todos os canais">
+      <div class="produto-content">
+        <h2>globoplay R$ 10,00</h2>
+        <p>globoplay 30 dias</p>
+        <a href="https://www.nexte.shop/globoplay-30-dias/p" target="_blank" rel="noopener noreferrer">Comprar</a>
+      </div>
+    </div>
+
+ <div class="produto">
+      <img src="https://i.postimg.cc/rp5MFx4H/paramount-privada-6813b0589fa22-large.webp" alt="Todos os canais">
+      <div class="produto-content">
+        <h2>PARAMOUNT R$ 11,00</h2>
+        <p>PARAMOUNT+ 30 DIAS</p>
+        <a href="https://www.nexte.shop/paramount-privada/p" target="_blank" rel="noopener noreferrer">Comprar</a>
+      </div>
+    </div>
+
+
+ <div class="produto">
+      <img src="https://i.postimg.cc/Hs3fz30H/prime-video-tela-privada-30-dias-6813af218ad5e-large.webp" alt="Todos os canais">
+      <div class="produto-content">
+        <h2>PRIME VIDEO R$ 13,10</h2>
+        <p>PRIME VIDEO TELA PRIVADA 30 DIAS</p>
+        <a href="https://www.nexte.shop/prime-video-tela-privada-30-dias/p" target="_blank" rel="noopener noreferrer">Comprar</a>
+      </div>
+    </div>
+
+        <div class="produto">
+      <img src="https://i.postimg.cc/qBh4DPbw/crunchyroll-por-30-dias-682c4852107c9-large.webp" alt="Disney+Star">
+      <div class="produto-content">
+        <h2>crunchyroll R$ 10,00</h2>
+        <p>crunchyroll por 30 dias</p>
+        <a href="https://www.nexte.shop/crunchyroll-por-30-dias/p" target="_blank" rel="noopener noreferrer">Comprar</a>
+      </div>
+    </div>
+  
+
+    <div class="separador-seg"> OUTROS </div>
+
+    <div class="produto">
+      <img src="https://i.postimg.cc/cJsqBj2s/youtube-premium-youtube-music-30-dias-via-link-6812462ac3fd4-large.webp" alt="Disney+Star">
+      <div class="produto-content">
+        <h2>youtube premium + youtube music R$ 12,00</h2>
+        <p>youtube via link</p>
+        <a href="https://www.nexte.shop/youtube-premium-youtube-music-30-dias-via-link/p" target="_blank" rel="noopener noreferrer">Comprar</a>
+      </div>
+    </div>
+
+   
+
+        <div class="produto">
+      <img src="https://i.postimg.cc/RVMxfdp1/Sem-T-tulo-1.png" alt="Disney+Star">
+      <div class="produto-content">
+        <h2>RECARGA DA TIM R$ 10,00</h2>
+        <p>RECARGA DA TIM IMPERDÍVEL R$20</p>
+        <a href="https://www.nexte.shop/recarga-da-tim-imperdivel-r20/p" target="_blank" rel="noopener noreferrer">Comprar</a>
+      </div>
+    </div>
+
+    
+        <div class="produto">
+      <img src="https://i.postimg.cc/SxLGFLfs/2222.png" alt="Disney+Star">
+      <div class="produto-content">
+        <h2>RECARGA CLARO R$ 10,00</h2>
+        <p>RECARGA IMPERDÍVEL CLARO R$20</p>
+        <a href="https://www.nexte.shop/recarga-imperdivel-claro-r20/p" target="_blank" rel="noopener noreferrer">Comprar</a>
+      </div>
+    </div>
+
+
+  <button id="topoBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
+
+  <div class="whatsapp-float">
+    <a href="https://wa.me/5551980323797?text=oi%20quero%20tirar%20minha%20d%C3%BAvida%3F" target="_blank" title="Fale conosco no WhatsApp">
+      💬
+    </a>
+  </div>
+
+  <script>
+    const produtos = document.querySelectorAll('.produto');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    produtos.forEach(produto => observer.observe(produto));
+
+    const topoBtn = document.getElementById("topoBtn");
+    window.onscroll = () => {
+      topoBtn.style.display = window.scrollY > 200 ? "block" : "none";
+    };
+  </script>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrossel com Texto no Topo e Imagens Maiores</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #fff;
+    }
+
+    .header-text {
+      text-align: center;
+      padding: 25px 15px 10px;
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #00e5ff;
+      text-shadow: 0 0 10px #00e5ffaa;
+      user-select: none;
+    }
+
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding: 20px 0 40px;
+      background: #1c1c1c;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      flex-shrink: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 500px; /* Aumentado para imagens maiores */
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 12px;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: #fff;
+      font-size: 2.5rem;
+      padding: 12px 18px;
+      cursor: pointer;
+      z-index: 1;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    .carousel-button:hover {
+      background-color: rgba(255, 255, 255, 0.5);
+      color: #000;
+    }
+
+    .carousel-button.prev {
+      left: 15px;
+    }
+
+    .carousel-button.next {
+      right: 15px;
+    }
+
+    @media(min-width: 600px) {
+      .carousel-slide {
+        min-width: 48%;
+        height: 500px;
+      }
+    }
+
+    @media(min-width: 1000px) {
+      .carousel-slide {
+        min-width: 32%;
+        height: 550px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-text">Lançamentos Imperdíveis de Filmes e Séries</div>
+
+  <div class="carousel-container" aria-label="Carrossel de lançamentos">
+    <div class="carousel-track">
+      <div class="carousel-slide"><img src="https://i.postimg.cc/3xpJtMcv/Captura-de-tela-2025-05-31-142324.png" alt="Filme 1" /></div>
+      <div class="carousel-slide"><img src="https://i.postimg.cc/qvK0r9yx/356444.png" alt="Filme 2" /></div>
+      <div class="carousel-slide"><img src="https://i.postimg.cc/T2WxMKmW/333.png" alt="Filme 3" /></div>
+      <div class="carousel-slide"><img src="https://i.postimg.cc/yW4jZQYc/Captura-de-tela-2025-05-31-142448.png" alt="Filme 4" /></div>
+      <div class="carousel-slide"><img src="https://i.postimg.cc/TYN709N8/kkk.png" alt="Filme 5" /></div>
+    </div>
+    <button class="carousel-button prev" aria-label="Anterior">&#10094;</button>
+    <button class="carousel-button next" aria-label="Próximo">&#10095;</button>
+  </div>
+
+  <script>
+    const track = document.querySelector('.carousel-track');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prev = document.querySelector('.carousel-button.prev');
+    const next = document.querySelector('.carousel-button.next');
+
+    let index = 0;
+
+    function slidesPerView() {
+      if (window.innerWidth >= 1000) return 3;
+      if (window.innerWidth >= 600) return 2;
+      return 1;
+    }
+
+    function moveToSlide(idx) {
+      const slideWidth = slides[0].getBoundingClientRect().width + 20; // + gap between slides
+      track.style.transform = `translateX(-${idx * slideWidth}px)`;
+    }
+
+    prev.addEventListener('click', () => {
+      index = Math.max(0, index - 1);
+      moveToSlide(index);
+      resetAuto();
+    });
+
+    next.addEventListener('click', () => {
+      index = (index + 1) % (slides.length - slidesPerView() + 1);
+      moveToSlide(index);
+      resetAuto();
+    });
+
+    window.addEventListener('resize', () => moveToSlide(index));
+
+    let auto = setInterval(() => {
+      index = (index + 1) % (slides.length - slidesPerView() + 1);
+      moveToSlide(index);
+    }, 4000);
+
+    function resetAuto() {
+      clearInterval(auto);
+      auto = setInterval(() => {
+        index = (index + 1) % (slides.length - slidesPerView() + 1);
+        moveToSlide(index);
+      }, 4000);
+    }
+
+    moveToSlide(index);
+  </script>
+
+</body>
+</html>
+
+
+</body>
+</html>
